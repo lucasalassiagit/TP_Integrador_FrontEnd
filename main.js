@@ -1,3 +1,14 @@
+//Empieza buscarPais
+
+/*const boton = document.getElementById("boton");
+
+boton.addEventListener("Onclick", (e) => {
+  e.preventDefault(); //para evitar recargar la pagina
+  const paisBuscar = document.getElementById("Buscador").value;
+  alert(`Pais buscado ${paisBuscar}`);
+});*/
+
+//Termina buscarPais
 const contenedorPaises = document.getElementById("listado");
 const contenedorBanderas = document.getElementById("cont-galeria");
 
