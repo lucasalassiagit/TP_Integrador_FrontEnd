@@ -87,20 +87,7 @@ async function paisesMasPoblados(cont) {
     const ArrayPaises = data.slice(3, 15); //Elijo la cantidad de elementos a mostrar
 
     ArrayPaises.forEach((pais) => {
-      const div = document.createElement("div");
-      const img = document.createElement("img");
-      const nombre = document.createElement("p");
-
-      nombre.textContent = `Pais: ${pais.name.common}`;
-
-      img.src = pais.flags.png;
-      img.alt = `Bandera de ${pais.name.common}`;
-      img.className = "img-fluid m-2";
-
-      div.appendChild(nombre);
-      div.appendChild(img);
-
-      div.className = "card p-3 m-2 text-center";
+      
 
       cont.appendChild(div);
     });
@@ -108,3 +95,80 @@ async function paisesMasPoblados(cont) {
     console.error("Error:", error);
   }
 }*/
+
+//Pagina buscar pais
+
+const campoBuscar = document.getElementById("Buscador");
+const botonBuscar = document.getElementById("botonBuscar");
+
+botonBuscar.addEventListener("click", (e) => {
+  e.preventDefault(); // Evita que la página se recargue
+  //Llamamos a funcion buscar pais
+  buscarPais(campoBuscar.value);
+});
+
+async function buscarPais(paisIngresado) {
+  try {
+    // Hacemos la solicitud HTTP (GET)
+
+    const response = await fetch(
+      `https://restcountries.com/v3.1/name/${paisIngresado}`
+    );
+
+    // Verificamos si la respuesta fue exitosa
+    if (!response.ok) {
+      throw new Error(`Error al buscar el pais ${paisIngresado}`);
+    }
+
+    // Convertimos la respuesta en JSON
+    const data = await response.json(); //En JavaScript, los datos JSON se manejan directamente como objetos. Data es el objeto completo.
+
+    //Mandamos los datos del pais a la funcion informacionPais()
+
+    informacionPais(data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+async function informacionPais(datosPais) {
+  const contenedorTexto = document.getElementById("cont-texto-sobre-pais");
+  contenedorTexto.innerHTML = `
+      <h2>${datosPais[0].name.common}</h2>
+      <img src="${datosPais[0].flags.png}" alt="Bandera de ${
+    datosPais[0].name.common
+  }" width="100">
+      
+      <p class="mt-3"> 
+        El nombre oficial del país es: <strong>${
+          datosPais[0].translations.spa?.official || pais.name.official
+        }</strong>.
+        Su capital es <strong>${
+          datosPais[0].capital?.[0] || "No disponible"
+        }</strong>, 
+        está ubicado en <strong>${datosPais[0].region}</strong> 
+        y su población es de <strong>${datosPais[0].population.toLocaleString()} habitantes</strong>.
+        ${
+          datosPais[0].independent
+            ? "Es un país independiente."
+            : "No es un país independiente."
+        }
+      </p>
+
+      <p>
+        Idioma(s): ${
+          Object.values(datosPais[0].languages || {}).join(", ") ||
+          "No disponible"
+        }<br>
+        Moneda: ${
+          Object.values(datosPais[0].currencies || {})
+            .map((c) => c.name)
+            .join(", ") || "No disponible"
+        } (${
+    Object.values(datosPais[0].currencies || {})
+      .map((c) => c.symbol)
+      .join(", ") || "—"
+  })
+      </p>
+    `;
+}
