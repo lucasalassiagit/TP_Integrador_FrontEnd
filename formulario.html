@@ -16,25 +16,125 @@
     <title>Formulario de contacto</title>
   </head>
   <body>
-    <form action="">
-      <div>
-        <label for="">Nombre: </label>
-        <input type="text" placeholder="Ingrese nombre..." required />
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.html"
+          ><i class="fa-solid fa-house"></i
+        ></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="formulario.html">Formulario</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="galeria.html">Galeria</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="buscarPais.html">Buscar pais</a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <label for="">Apellido: </label>
-        <input type="text" placeholder="Ingrese apellido..." required />
+    </nav>
+
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <form id="formContacto" class="border p-4 rounded shadow-sm bg-light">
+            <h2 class="mb-4 text-center">Contacto</h2>
+
+            <!-- Campo 1: Nombre (texto) -->
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre completo*</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nombre"
+                placeholder="Ej: Juan Pérez"
+              />
+              <div class="invalid-feedback">Por favor ingresa tu nombre</div>
+            </div>
+
+            <!-- Campo 2: Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email*</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="ejemplo@mail.com"
+              />
+              <div class="invalid-feedback">Ingresa un email válido</div>
+            </div>
+
+            <!-- Campo 3: Teléfono -->
+            <div class="mb-3">
+              <label for="telefono" class="form-label">Teléfono*</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="telefono"
+                placeholder="+54 11 1234-5678"
+              />
+              <div class="invalid-feedback">Formato: +54 11 1234-5678</div>
+            </div>
+
+            <!-- Campo 4: Fecha (date) -->
+            <div class="mb-3">
+              <label for="fecha" class="form-label">Fecha de contacto*</label>
+              <input type="date" class="form-control" id="fecha" />
+              <div class="invalid-feedback">Selecciona una fecha</div>
+            </div>
+
+            <!-- Campo 5: Select (opciones) -->
+            <div class="mb-3">
+              <label for="consulta" class="form-label">Tipo de consulta*</label>
+              <select class="form-select" id="consulta">
+                <option value="" selected disabled>Seleccione...</option>
+                <option value="ventas">Información de productos</option>
+                <option value="soporte">Soporte técnico</option>
+                <option value="facturacion">Facturación</option>
+              </select>
+              <div class="invalid-feedback">Selecciona una opción</div>
+            </div>
+
+            <!-- Campo 6: Textarea -->
+            <div class="mb-3">
+              <label for="mensaje" class="form-label">Mensaje*</label>
+              <textarea
+                class="form-control"
+                id="mensaje"
+                rows="3"
+                placeholder="Escribe tu mensaje..."
+              ></textarea>
+              <div class="invalid-feedback">Mínimo 10 caracteres</div>
+            </div>
+
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="terminos" />
+              <label class="form-check-label" for="terminos"
+                >Acepto los términos y condiciones*</label
+              >
+              <div class="invalid-feedback">Debes aceptar los términos</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Enviar</button>
+          </form>
+        </div>
       </div>
-      <div>
-        <label for="">Edad: </label>
-        <input type="number" placeholder="Ingrese edad..." required />
-      </div>
-      <div>
-        <label for="">Email: </label>
-        <input type="email" placeholder="Ingrese email..." required />
-      </div>
-      <button type="submit">Enviar</button>
-    </form>
+    </div>
 
     <br />
     <br />
