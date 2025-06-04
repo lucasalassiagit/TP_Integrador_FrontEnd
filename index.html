@@ -19,49 +19,113 @@
     <title>Inicio</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-primary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.html"
-          ><i class="fa-solid fa-house text-light"></i
-        ></a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link text-light" href="formulario.html"
-                >Formulario</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-light" href="galeria.html">Galeria</a>
-            </li>
+    <div class="container">
+      <nav
+        class="navbar navbar-expand-lg bg-body-tertiary"
+        data-bs-theme="dark"
+      >
+        <div class="container-fluid">
+          <a class="navbar-brand" href="index.html"
+            ><i class="fa-solid fa-house text-light"></i
+          ></a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 nav-underline">
+              <li class="nav-item">
+                <a class="nav-link text-light" href="formulario.html"
+                  >Formulario</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="galeria.html">Galeria</a>
+              </li>
 
-            <li class="nav-item">
-              <a class="nav-link text-light" href="buscarPais.html"
-                >Buscar pais</a
-              >
-            </li>
-          </ul>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="buscarPais.html"
+                  >Buscar pais</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </div>
 
     <section>
+      <h1 class="text-center">Descubre el Mundo con Datos Precisos</h1>
+      <p>
+        Bienvenido a <strong>Estadisticas Mundiales</strong>, tu fuente
+        confiable de información actualizada sobre todos los países del mundo.
+        Gracias a la poderosa Countries API, ofrecemos datos demográficos,
+        geográficos, económicos y culturales en un solo lugar.Ideal para
+        estudiantes, viajeros y curiosos que deseen conocer nuestro planeta con
+        información verificada y en tiempo real.
+      </p>
+    </section>
+    <section>
+      Explora:
       <div class="container">
+        <div class="row g-2">
+          <div class="col-10 col-md-6 col-lg-3">
+            <div class="card text-bg-dark">
+              <img src="Imagenes/Banderas.png" class="card-img" alt="..." />
+              <div
+                class="card-img-overlay d-flex justify-content-center align-items-center"
+              >
+                <h5 class="card-title text-white">Banderas y capitales</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-10 col-md-6 col-lg-3">
+            <div class="card text-bg-dark">
+              <img src="Imagenes/Banderas.png" class="card-img" alt="..." />
+              <div
+                class="card-img-overlay d-flex justify-content-center align-items-center"
+              >
+                <h5 class="card-title text-white">Poblacion e idiomas</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-10 col-md-6 col-lg-3">
+            <div class="card text-bg-dark">
+              <img src="Imagenes/Banderas.png" class="card-img" alt="..." />
+              <div
+                class="card-img-overlay d-flex justify-content-center align-items-center"
+              >
+                <h5 class="card-title text-white">Monedas y regiones</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-10 col-md-6 col-lg-3">
+            <div class="card text-bg-dark">
+              <img src="Imagenes/Banderas.png" class="card-img" alt="..." />
+              <div
+                class="card-img-overlay d-flex justify-content-center align-items-center"
+              >
+                <h5 class="card-title text-white">Mucho mas...</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container mt-5">
         <h3 class="text-center">Los 10 paises mas poblados</h3>
-        <div class="table-responsive-md">
+        <div class="table-responsive-md pt-3">
           <table
-            class="table table-striped table-hover table-bordered d-none d-md-table"
+            class="table table-striped table-hover table-bordered d-none d-md-table table-dark border-white"
           >
             <!-- Oculta tabla en móviles -->
             <thead>
@@ -90,7 +154,7 @@
       <div id="areas" class="container">Comparacion de areas</div>
     </section>
 
-    <footer class="bg-dark text-white bg-primary">
+    <footer class="bg-dark text-white bg-primary p-4">
       <div class="container">
         <div class="row">
           <!-- Columna 1: Logo o nombre -->
