@@ -7,14 +7,13 @@ body{
     background-color: #000;
 }
 
-.cartas-exploracion{
-    transition: transform 0.3s ease;
-}
+
+
+
 
 .cartas-exploracion:hover{
     opacity: .8;
     outline: auto;
-    transform: scale(1.1);
     color: var(--color-azul) !important
 }
 
@@ -42,4 +41,25 @@ a{
 
 .tarjetas-nacimiento:hover{
     color: var(--color-azul) !important
+}
+
+
+.enlace-whatsapp:hover{
+    color: #25D366 !important
+}
+
+.enlace-facebook:hover{
+    color: #1877F2 !important
+}
+
+.enlace-instagram:hover{
+    color: #F77737 !important
+}
+
+.enlace-twitter:hover{
+    color: #1DA1F2 !important
+}
+
+.enlace-youtube:hover{
+    color: #FF0000 !important
 }
