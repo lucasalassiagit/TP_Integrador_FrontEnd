@@ -17,7 +17,7 @@
 
     <title>Formulario de contacto</title>
   </head>
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
       <div class="container-fluid">
         <a class="navbar-brand text-primary" href="index.html"
@@ -55,98 +55,70 @@
       </div>
     </nav>
 
-    <div class="container mt-5">
-      <div class="row justify-content-center">
-        <div class="col-md-8 col-lg-6">
-          <form id="formContacto" class="border p-4 rounded shadow-sm bg-light">
-            <h2 class="mb-4 text-center">
-              Registra tus datos para recibir notificaciones diarias
-            </h2>
-
-            <!-- Campo 1: Nombre (texto) -->
-            <div class="mb-3">
-              <label for="nombre" class="form-label">Nombre completo*</label>
-              <input
-                type="text"
-                class="form-control"
-                id="nombre"
-                placeholder="Ej: Juan Pérez"
-              />
-              <div class="invalid-feedback">Por favor ingresa tu nombre</div>
-            </div>
-
-            <!-- Campo 2: Email -->
-            <div class="mb-3">
-              <label for="email" class="form-label">Email*</label>
-              <input
-                type="email"
-                class="form-control"
-                id="email"
-                placeholder="ejemplo@mail.com"
-              />
-              <div class="invalid-feedback">Ingresa un email válido</div>
-            </div>
-
-            <!-- Campo 3: Teléfono -->
-            <div class="mb-3">
-              <label for="telefono" class="form-label">Teléfono*</label>
-              <input
-                type="tel"
-                class="form-control"
-                id="telefono"
-                placeholder="+54 11 1234-5678"
-              />
-              <div class="invalid-feedback">Formato: +54 11 1234-5678</div>
-            </div>
-
-            <!-- Campo 4: Fecha (date) -->
-            <div class="mb-3">
-              <label for="fecha" class="form-label">Fecha de contacto*</label>
-              <input type="date" class="form-control" id="fecha" />
-              <div class="invalid-feedback">Selecciona una fecha</div>
-            </div>
-
-            <!-- Campo 5: Select (opciones) -->
-            <div class="mb-3">
-              <label for="consulta" class="form-label">Tipo de consulta*</label>
-              <select class="form-select" id="consulta">
-                <option value="" selected disabled>Seleccione...</option>
-                <option value="ventas">Información de productos</option>
-                <option value="soporte">Soporte técnico</option>
-                <option value="facturacion">Facturación</option>
-              </select>
-              <div class="invalid-feedback">Selecciona una opción</div>
-            </div>
-
-            <!-- Campo 6: Textarea -->
-            <div class="mb-3">
-              <label for="mensaje" class="form-label">Mensaje*</label>
-              <textarea
-                class="form-control"
-                id="mensaje"
-                rows="3"
-                placeholder="Escribe tu mensaje..."
-              ></textarea>
-              <div class="invalid-feedback">Mínimo 10 caracteres</div>
-            </div>
-
-            <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="terminos" />
-              <label class="form-check-label" for="terminos"
-                >Acepto los términos y condiciones*</label
-              >
-              <div class="invalid-feedback">Debes aceptar los términos</div>
-            </div>
-
-            <button type="submit" class="btn btn-primary w-100">Enviar</button>
-          </form>
+    <main class="flex-grow-1">
+      <h1>Registrarse</h1>
+      <h3>Es grauito y te enviaremos informacion interesanete</h3>
+      <form id="contactForm" novalidate>
+        <!-- Añade novalidate para desactivar validación nativa -->
+        <!-- Campo 1: Nombre -->
+        <div class="form-group">
+          <label for="nombre">Nombre completo*</label>
+          <input type="text" id="nombre" name="nombre" />
+          <div id="nombreError" class="error-message"></div>
         </div>
-      </div>
-    </div>
 
-    <br />
-    <br />
-    <br />
+        <!-- Campo 2: Email -->
+        <div class="form-group">
+          <label for="email">Correo electrónico*</label>
+          <input type="email" id="email" name="email" />
+          <div id="emailError" class="error-message"></div>
+        </div>
+
+        <!-- Campo 3: Teléfono -->
+        <div class="form-group">
+          <label for="telefono">Teléfono*</label>
+          <input
+            type="tel"
+            id="telefono"
+            name="telefono"
+            pattern="[0-9]{8,15}"
+          />
+          <div id="telefonoError" class="error-message"></div>
+        </div>
+
+        <!-- Campo 4: Frecuencia -->
+        <div class="form-group">
+          <label for="frecuencia">Frecuencia</label>
+          <select id="frecuencia" name="frecuencia">
+            <option value="">Todos los días</option>
+            <option value="semanal">Una vez a la semana</option>
+            <option value="mensual">Una vez al mes</option>
+          </select>
+        </div>
+
+        <!-- Campo 5: Mensaje -->
+        <div class="form-group">
+          <label for="mensaje">Mensaje (opcional)</label>
+          <textarea id="mensaje" name="mensaje" rows="5"></textarea>
+        </div>
+
+        <!-- Campo 6: Fecha Nacimiento -->
+        <div class="form-group">
+          <label for="fecha">Fecha de nacimiento*</label>
+          <input type="date" id="fecha" name="fecha" />
+          <div id="fechaError" class="error-message"></div>
+        </div>
+
+        <!-- Términos y condiciones -->
+        <div class="form-check">
+          <input type="checkbox" id="terminos" name="terminos" />
+          <label for="terminos">Acepto términos y condiciones*</label>
+          <div id="terminosError" class="error-message"></div>
+        </div>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </main>
 
     <footer class="bg-dark text-white py-4">
       <div class="container">
@@ -175,5 +147,7 @@
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
       defer
     ></script>
+
+    <script src="pruebaForm.js"></script>
   </body>
 </html>

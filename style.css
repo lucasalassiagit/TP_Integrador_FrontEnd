@@ -1,10 +1,16 @@
 :root{
-    --color-azul: #0d6efd
+    --color-azul: #0d6efd;
+    --color-letras: #fff;
 }
 
 
 body{
     background-color: #000;
+    color: var(--color-letras);
+}
+
+main{
+    padding-top: 20px; /*Compensa el espacio del navbar*/
 }
 
 
@@ -56,10 +62,9 @@ a{
     color: #F77737 !important
 }
 
-.enlace-twitter:hover{
-    color: #1DA1F2 !important
-}
+
 
 .enlace-youtube:hover{
     color: #FF0000 !important
 }
+

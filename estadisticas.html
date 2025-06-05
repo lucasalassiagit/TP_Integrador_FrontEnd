@@ -15,9 +15,9 @@
 
     <link rel="stylesheet" href="style.css" />
 
-    <title>Buscador</title>
+    <title>Estadisticas</title>
   </head>
-  <body>
+  <body class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
       <div class="container-fluid">
         <a class="navbar-brand text-primary" href="index.html"
@@ -54,40 +54,104 @@
         </div>
       </div>
     </nav>
-
-    <section>
-      <div class="container mt-5">
-        <h3 class="text-center text-white">Los 10 paises mas poblados</h3>
-        <div class="table-responsive-md pt-3">
-          <table
-            class="table table-striped table-hover table-bordered d-none d-md-table table-dark border-white"
-          >
-            <!-- Oculta tabla en móviles -->
-            <thead>
-              <tr>
-                <th scope="col">Orden</th>
-                <th scope="col">Pais</th>
-                <th scope="col">Capital</th>
-                <th scope="col">Continente</th>
-                <th scope="col">Poblacion</th>
-              </tr>
-            </thead>
-            <tbody id="cuerpoTabla"></tbody>
-          </table>
+    <main class="flex-grow-1">
+      <section>
+        <div class="container mt-5">
+          <h3 class="text-center text-white">Los 10 paises mas poblados</h3>
+          <div class="table-responsive-md pt-3">
+            <table
+              class="table table-striped table-hover table-bordered d-none d-md-table table-dark border-white"
+            >
+              <!-- Oculta tabla en móviles -->
+              <thead>
+                <tr>
+                  <th scope="col">Orden</th>
+                  <th scope="col">Pais</th>
+                  <th scope="col">Capital</th>
+                  <th scope="col">Continente</th>
+                  <th scope="col">Poblacion</th>
+                </tr>
+              </thead>
+              <tbody id="cuerpoTabla"></tbody>
+            </table>
+          </div>
+          <!-- Contenedor para cards (solo visible en móviles) -->
+          <div class="container text-center">
+            <div class="row">
+              <div class="col-9 offset-1 align-self-center">
+                <div id="cardsContainer" class="d-md-none"></div>
+              </div>
+            </div>
+          </div>
         </div>
-        <!-- Contenedor para cards (solo visible en móviles) -->
-        <div class="container text-center">
-          <div class="row">
-            <div class="col-9 offset-1 align-self-center">
-              <div id="cardsContainer" class="d-md-none"></div>
+      </section>
+      <section>
+        <div id="areas" class="container">Comparacion de areas</div>
+      </section>
+    </main>
+
+    <footer class="bg-dark text-white py-3 mt-auto">
+      <div class="container">
+        <div class="row align-items-center">
+          <!-- Columna Redes Sociales -->
+          <div class="col-12 col-md-8 col-lg-6 mb-3 mb-md-0">
+            <h5 class="mb-2">Nuestras Redes</h5>
+            <div class="d-flex flex-wrap gap-2">
+              <a
+                href="https://web.whatsapp.com/"
+                target="_blank"
+                class="text-white text-decoration-none d-inline-flex align-items-center gap-1 enlace-whatsapp"
+              >
+                <i class="fa-brands fa-whatsapp fs-5"></i> WhatsApp
+              </a>
+
+              <span class="text-secondary">•</span>
+
+              <a
+                href="https://www.facebook.com/?locale=es_LA"
+                target="_blank"
+                class="text-white text-decoration-none d-inline-flex align-items-center gap-1 enlace-facebook"
+              >
+                <i class="fa-brands fa-facebook fs-5"></i> Facebook
+              </a>
+
+              <span class="text-secondary">•</span>
+
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                class="text-white text-decoration-none d-inline-flex align-items-center gap-1 enlace-instagram"
+              >
+                <i class="fa-brands fa-instagram fs-5"></i> Instagram
+              </a>
+
+              <span class="text-secondary">•</span>
+
+              <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                class="text-white text-decoration-none d-inline-flex align-items-center gap-1 enlace-youtube"
+              >
+                <i class="fa-brands fa-youtube fs-5"></i> YouTube
+              </a>
+            </div>
+          </div>
+
+          <!-- Columna Información -->
+          <div class="col-12 col-md-4 col-lg-6 text-md-end">
+            <h5 class="text-primary mb-2">Estadísticas Mundiales</h5>
+            <div class="d-flex flex-column gap-1">
+              <p class="text-secondary mb-0 small">
+                © 2025 Todos los derechos reservados.
+              </p>
+              <p class="text-secondary small mb-0">
+                Datos actualizados diariamente desde fuentes oficiales.
+              </p>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <section>
-      <div id="areas" class="container">Comparacion de areas</div>
-    </section>
+    </footer>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"

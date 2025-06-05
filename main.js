@@ -1,5 +1,5 @@
 //Index
-const cuerpoTabla = document.getElementById("cuerpoTabla");
+/*const cuerpoTabla = document.getElementById("cuerpoTabla");
 const cardsMovil = document.getElementById("cardsContainer");
 
 paisesMasPoblados(cuerpoTabla, cardsMovil);
@@ -53,95 +53,106 @@ async function paisesMasPoblados(tabla, cards) {
   } catch (error) {
     console.error("Error:", error);
   }
+}*/
+
+async function paisesMasPoblados() {
+  try {
+    // 1. Verificar si estamos en la página correcta
+    const cuerpoTabla = document.getElementById("cuerpoTabla");
+    if (!cuerpoTabla) return; // Salir si no estamos en la página de países
+
+    // 2. Configurar contenedores
+    let cardsContainer = document.getElementById("cardsContainer");
+    if (!cardsContainer) {
+      cardsContainer = document.createElement("div");
+      cardsContainer.id = "cardsContainer";
+      cardsContainer.className = "row d-md-none"; // Solo visible en móviles
+      document.body.appendChild(cardsContainer);
+    }
+
+    // 3. Hacer la solicitud a la API
+    const response = await fetch("https://restcountries.com/v3.1/all");
+    if (!response.ok) throw new Error("Error al cargar los países");
+
+    // 4. Procesar los datos
+    const data = await response.json();
+    const paisesOrdenados = data
+      .sort((a, b) => b.population - a.population)
+      .slice(0, 10);
+
+    // 5. Limpiar contenedores
+    cuerpoTabla.innerHTML = "";
+    cardsContainer.innerHTML = "";
+
+    // 6. Crear elementos para cada país
+    paisesOrdenados.forEach((pais, index) => {
+      const numero = index + 1;
+
+      // Fila de tabla para desktop
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+        <th scope="row">${numero}</th>
+        <td>${pais.translations?.spa?.common || pais.name.common}</td>
+        <td>${pais.capital?.[0] || "N/A"}</td>
+        <td>${pais.continents?.[0] || "N/A"}</td>
+        <td>${pais.population?.toLocaleString() || "N/A"}</td>
+      `;
+      cuerpoTabla.appendChild(fila);
+
+      // Tarjeta para móviles
+      const card = document.createElement("div");
+      card.className = "col-12 mb-3";
+      card.innerHTML = `
+        <div class="card text-bg-dark border-white">
+          <div class="card-header">
+            <h5 class="card-title">${numero}. ${
+        pais.translations?.spa?.common || pais.name.common
+      }</h5>
+          </div>
+          <div class="card-body">
+            <p class="card-text"><strong>Capital:</strong> ${
+              pais.capital?.[0] || "N/A"
+            }</p>
+            <p class="card-text"><strong>Continente:</strong> ${
+              pais.continents?.[0] || "N/A"
+            }</p>
+            <p class="card-text"><strong>Población:</strong> ${
+              pais.population?.toLocaleString() || "N/A"
+            }</p>
+            ${
+              pais.flags?.png
+                ? `<img src="${pais.flags.png}" alt="Bandera" class="img-fluid mt-2" style="max-height: 100px;">`
+                : ""
+            }
+          </div>
+        </div>
+      `;
+      cardsContainer.appendChild(card);
+    });
+  } catch (error) {
+    console.error("Error en paisesMasPoblados:", error);
+    // Mostrar error solo en la página correcta
+    if (document.getElementById("cuerpoTabla")) {
+      const errorDiv = document.createElement("div");
+      errorDiv.className = "alert alert-danger mt-3";
+      errorDiv.textContent = `Error al cargar los datos: ${error.message}`;
+      document.body.prepend(errorDiv);
+    }
+  }
 }
 
+// Verificar si debemos ejecutar esta función en la página actual
+function initPaisesPage() {
+  // Solo ejecutar si estamos en la página que tiene la tabla
+  if (document.getElementById("cuerpoTabla")) {
+    document.addEventListener("DOMContentLoaded", paisesMasPoblados);
+  }
+}
+
+// Llamar a la función de inicialización
+initPaisesPage();
+
 //Pagina formulario
-document
-  .getElementById("formContacto")
-  .addEventListener("submit", function (e) {
-    e.preventDefault();
-    let isValid = true;
-
-    // Resetear validaciones
-    document
-      .querySelectorAll(".is-invalid")
-      .forEach((el) => el.classList.remove("is-invalid"));
-
-    // Validar Nombre (mínimo 3 caracteres)
-    const nombre = document.getElementById("nombre");
-    if (nombre.value.trim().length < 3) {
-      nombre.classList.add("is-invalid");
-      isValid = false;
-    }
-
-    // Validar Email
-    const email = document.getElementById("email");
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email.value)) {
-      email.classList.add("is-invalid");
-      isValid = false;
-    }
-
-    // Validar Teléfono (formato internacional)
-    const telefono = document.getElementById("telefono");
-    const telRegex = /^\+?\d{1,4}[\s-]?\d{1,4}[\s-]?\d{4,8}$/;
-    if (!telRegex.test(telefono.value)) {
-      telefono.classList.add("is-invalid");
-      isValid = false;
-    }
-
-    // Validar Fecha
-    const fecha = document.getElementById("fecha");
-    if (!fecha.value) {
-      fecha.classList.add("is-invalid");
-      isValid = false;
-    }
-
-    // Validar Select
-    const consulta = document.getElementById("consulta");
-    if (!consulta.value) {
-      consulta.classList.add("is-invalid");
-      isValid = false;
-    }
-
-    // Validar Mensaje (mínimo 10 caracteres)
-    const mensaje = document.getElementById("mensaje");
-    if (mensaje.value.trim().length < 10) {
-      mensaje.classList.add("is-invalid");
-      isValid = false;
-    }
-
-    // Validar Checkbox
-    const terminos = document.getElementById("terminos");
-    if (!terminos.checked) {
-      terminos.classList.add("is-invalid");
-      isValid = false;
-    }
-
-    // Si todo es válido
-    if (isValid) {
-      // Simular envío (en un proyecto real sería un fetch/AJAX)
-      alert("Formulario enviado correctamente");
-      this.reset();
-    } else {
-      // Mostrar mensaje general de error
-      const firstInvalid = document.querySelector(".is-invalid");
-      firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  });
-
-// Validación en tiempo real para campos
-document
-  .querySelectorAll(
-    "#formContacto input, #formContacto textarea, #formContacto select"
-  )
-  .forEach((input) => {
-    input.addEventListener("input", function () {
-      if (this.classList.contains("is-invalid")) {
-        this.classList.remove("is-invalid");
-      }
-    });
-  });
 
 /*async function obtenerBanderas(cont) {
   try {
@@ -244,3 +255,5 @@ async function informacionPais(datosPais) {
       </p>
     `;
 }*/
+
+// Registro
