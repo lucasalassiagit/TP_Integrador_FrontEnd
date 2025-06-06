@@ -55,89 +55,199 @@
       </div>
     </nav>
 
-    <main class="flex-grow-1">
-      <h1>Registrarse</h1>
-      <h3>Es grauito y te enviaremos informacion interesanete</h3>
-      <form id="contactForm" novalidate>
-        <!-- Añade novalidate para desactivar validación nativa -->
-        <!-- Campo 1: Nombre -->
-        <div class="form-group">
-          <label for="nombre">Nombre completo*</label>
-          <input type="text" id="nombre" name="nombre" />
-          <div id="nombreError" class="error-message"></div>
-        </div>
+    <main class="flex-grow-1 mb-4">
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-md-8 col-lg-6">
+            <h1 class="text-center mb-3 text-white">Registrarse</h1>
+            <h3 class="text-center text-white mb-4">
+              Es gratis y te enviaremos información interesante
+            </h3>
 
-        <!-- Campo 2: Email -->
-        <div class="form-group">
-          <label for="email">Correo electrónico*</label>
-          <input type="email" id="email" name="email" />
-          <div id="emailError" class="error-message"></div>
-        </div>
+            <form
+              id="contactForm"
+              novalidate
+              class="bg-black p-4 rounded shadow-sm"
+            >
+              <!-- Campo 1: Nombre -->
+              <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre completo*</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nombre"
+                  name="nombre"
+                />
+                <div id="nombreError" class="error-message"></div>
+              </div>
 
-        <!-- Campo 3: Teléfono -->
-        <div class="form-group">
-          <label for="telefono">Teléfono*</label>
-          <input
-            type="tel"
-            id="telefono"
-            name="telefono"
-            pattern="[0-9]{8,15}"
-          />
-          <div id="telefonoError" class="error-message"></div>
-        </div>
+              <!-- Campo 2: Email -->
+              <div class="mb-3">
+                <label for="email" class="form-label"
+                  >Correo electrónico*</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                />
+                <div id="emailError" class="error-message"></div>
+              </div>
 
-        <!-- Campo 4: Frecuencia -->
-        <div class="form-group">
-          <label for="frecuencia">Frecuencia</label>
-          <select id="frecuencia" name="frecuencia">
-            <option value="">Todos los días</option>
-            <option value="semanal">Una vez a la semana</option>
-            <option value="mensual">Una vez al mes</option>
-          </select>
-        </div>
+              <!-- Campo 3: Teléfono -->
+              <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono*</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  id="telefono"
+                  name="telefono"
+                  pattern="[0-9]{8,15}"
+                />
+                <div id="telefonoError" class="error-message"></div>
+              </div>
 
-        <!-- Campo 5: Mensaje -->
-        <div class="form-group">
-          <label for="mensaje">Mensaje (opcional)</label>
-          <textarea id="mensaje" name="mensaje" rows="5"></textarea>
-        </div>
+              <!-- Campo 4: Frecuencia -->
+              <div class="mb-3">
+                <label for="frecuencia" class="form-label"
+                  >Con que frecuencia quiere recibir informacion</label
+                >
+                <select class="form-select" id="frecuencia" name="frecuencia">
+                  <option value="">Todos los días</option>
+                  <option value="semanal">Una vez a la semana</option>
+                  <option value="mensual">Una vez al mes</option>
+                </select>
+              </div>
 
-        <!-- Campo 6: Fecha Nacimiento -->
-        <div class="form-group">
-          <label for="fecha">Fecha de nacimiento*</label>
-          <input type="date" id="fecha" name="fecha" />
-          <div id="fechaError" class="error-message"></div>
-        </div>
+              <!-- Campo 5: Mensaje -->
+              <div class="mb-3">
+                <label for="mensaje" class="form-label"
+                  >Mensaje (opcional)</label
+                >
+                <textarea
+                  class="form-control"
+                  id="mensaje"
+                  name="mensaje"
+                  rows="5"
+                ></textarea>
+              </div>
 
-        <!-- Términos y condiciones -->
-        <div class="form-check">
-          <input type="checkbox" id="terminos" name="terminos" />
-          <label for="terminos">Acepto términos y condiciones*</label>
-          <div id="terminosError" class="error-message"></div>
-        </div>
+              <!-- Campo 6: Fecha Nacimiento -->
+              <div class="mb-3">
+                <label for="fecha" class="form-label"
+                  >Fecha de nacimiento*</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="fecha"
+                  name="fecha"
+                />
+                <div id="fechaError" class="error-message"></div>
+              </div>
 
-        <button type="submit">Enviar</button>
-      </form>
+              <!-- Términos y condiciones -->
+              <div class="mb-3 form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="terminos"
+                  name="terminos"
+                />
+                <label class="form-check-label" for="terminos"
+                  >Acepto términos y condiciones*</label
+                >
+                <div id="terminosError" class="error-message"></div>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100">
+                Enviar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        id="myToast"
+      >
+        <div class="toast-header">
+          <strong class="me-auto">Estadisticas Mundiales</strong>
+          <small class="text-body-secondary">Ahora</small>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="toast"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="toast-body">Registrado con exito!</div>
+      </div>
     </main>
 
-    <footer class="bg-dark text-white py-4">
+    <footer class="bg-dark text-white py-3 mt-auto">
       <div class="container">
-        <div class="row">
-          <!-- Columna 1: Logo o nombre -->
-          <div class="col-3 mb-3">
-            <h5>Informacion sobre paises del mundo</h5>
-            <p class="text-muted">© 2025 Todos los derechos reservados.</p>
+        <div class="row align-items-center">
+          <!-- Columna Redes Sociales -->
+          <div class="col-12 col-md-8 col-lg-6 mb-3 mb-md-0">
+            <h5 class="mb-2">Nuestras Redes</h5>
+            <div class="d-flex flex-wrap gap-2">
+              <a
+                href="https://web.whatsapp.com/"
+                target="_blank"
+                class="text-white text-decoration-none d-inline-flex align-items-center gap-1 enlace-whatsapp"
+              >
+                <i class="fa-brands fa-whatsapp fs-5"></i> WhatsApp
+              </a>
+
+              <span class="text-secondary">•</span>
+
+              <a
+                href="https://www.facebook.com/?locale=es_LA"
+                target="_blank"
+                class="text-white text-decoration-none d-inline-flex align-items-center gap-1 enlace-facebook"
+              >
+                <i class="fa-brands fa-facebook fs-5"></i> Facebook
+              </a>
+
+              <span class="text-secondary">•</span>
+
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                class="text-white text-decoration-none d-inline-flex align-items-center gap-1 enlace-instagram"
+              >
+                <i class="fa-brands fa-instagram fs-5"></i> Instagram
+              </a>
+
+              <span class="text-secondary">•</span>
+
+              <a
+                href="https://www.youtube.com/"
+                target="_blank"
+                class="text-white text-decoration-none d-inline-flex align-items-center gap-1 enlace-youtube"
+              >
+                <i class="fa-brands fa-youtube fs-5"></i> YouTube
+              </a>
+            </div>
           </div>
 
-          <!-- Columna 3: Redes sociales -->
-          <div class="col mb-3">
-            <h5>Nuestras Redes Sociales</h5>
-            <a href="#" class="text-white me-2"
-              ><i class="fa-brands fa-facebook"></i> Facebook</a
-            >
-            <a href="#" class="text-white me-2"
-              ><i class="fa-brands fa-instagram"></i> Instagram</a
-            >
+          <!-- Columna Información -->
+          <div class="col-12 col-md-4 col-lg-6 text-md-end">
+            <h5 class="text-primary mb-2">Estadísticas Mundiales</h5>
+            <div class="d-flex flex-column gap-1">
+              <p class="text-secondary mb-0 small">
+                © 2025 Todos los derechos reservados.
+              </p>
+              <p class="text-secondary small mb-0">
+                Datos actualizados diariamente desde fuentes oficiales.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -148,6 +258,6 @@
       defer
     ></script>
 
-    <script src="pruebaForm.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>
