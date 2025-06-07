@@ -16,7 +16,9 @@ async function paisesMasPoblados() {
 
     // Hacemos la solicitud HTTP (GET)
     let contador = 1;
-    const response = await fetch("https://restcountries.com/v3.1/all");
+    const response = await fetch(
+      "https://restcountries.com/v3.1/all?fields=translations,capital,continents,population"
+    );
 
     // Verificamos si la respuesta fue exitosa
     if (!response.ok) {
@@ -73,110 +75,6 @@ function initPaisesPage() {
 
 // Llamar a la función de inicialización
 initPaisesPage();
-
-//Pagina formulario
-
-/*async function obtenerBanderas(cont) {
-  try {
-    // Hacemos la solicitud HTTP (GET)
-
-    const response = await fetch("https://restcountries.com/v3.1/all");
-
-    // Verificamos si la respuesta fue exitosa
-    if (!response.ok) {
-      throw new Error("Error al cargar los paises");
-    }
-
-    // Convertimos la respuesta en JSON
-    const data = await response.json(); //En JavaScript, los datos JSON se manejan directamente como objetos. Data es el objeto completo.
-    const ArrayPaises = data.slice(3, 15); //Elijo la cantidad de elementos a mostrar
-
-    ArrayPaises.forEach((pais) => {
-      
-
-      cont.appendChild(div);
-    });
-  } catch (error) {
-    console.error("Error:", error);
-  }
-}*/
-
-//Pagina buscar pais
-
-/*const campoBuscar = document.getElementById("Buscador");
-const botonBuscar = document.getElementById("botonBuscar");
-
-botonBuscar.addEventListener("click", (e) => {
-  e.preventDefault(); // Evita que la página se recargue
-  //Llamamos a funcion buscar pais
-  buscarPais(campoBuscar.value);
-});
-
-async function buscarPais(paisIngresado) {
-  try {
-    // Hacemos la solicitud HTTP (GET)
-
-    const response = await fetch(
-      `https://restcountries.com/v3.1/name/${paisIngresado}`
-    );
-
-    // Verificamos si la respuesta fue exitosa
-    if (!response.ok) {
-      throw new Error(`Error al buscar el pais ${paisIngresado}`);
-    }
-
-    // Convertimos la respuesta en JSON
-    const data = await response.json(); //En JavaScript, los datos JSON se manejan directamente como objetos. Data es el objeto completo.
-
-    //Mandamos los datos del pais a la funcion informacionPais()
-
-    informacionPais(data);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-}
-
-async function informacionPais(datosPais) {
-  const contenedorTexto = document.getElementById("cont-texto-sobre-pais");
-  contenedorTexto.innerHTML = `
-      <h2>${datosPais[0].name.common}</h2>
-      <img src="${datosPais[0].flags.png}" alt="Bandera de ${
-    datosPais[0].name.common
-  }" width="100">
-      
-      <p class="mt-3"> 
-        El nombre oficial del país es: <strong>${
-          datosPais[0].translations.spa?.official || pais.name.official
-        }</strong>.
-        Su capital es <strong>${
-          datosPais[0].capital?.[0] || "No disponible"
-        }</strong>, 
-        está ubicado en <strong>${datosPais[0].region}</strong> 
-        y su población es de <strong>${datosPais[0].population.toLocaleString()} habitantes</strong>.
-        ${
-          datosPais[0].independent
-            ? "Es un país independiente."
-            : "No es un país independiente."
-        }
-      </p>
-
-      <p>
-        Idioma(s): ${
-          Object.values(datosPais[0].languages || {}).join(", ") ||
-          "No disponible"
-        }<br>
-        Moneda: ${
-          Object.values(datosPais[0].currencies || {})
-            .map((c) => c.name)
-            .join(", ") || "No disponible"
-        } (${
-    Object.values(datosPais[0].currencies || {})
-      .map((c) => c.symbol)
-      .join(", ") || "—"
-  })
-      </p>
-    `;
-}*/
 
 //Registro
 
@@ -286,7 +184,7 @@ function validateFecha() {
     return false;
   }
 
-  if (hoy - fechaNac < 17) {
+  if (hoy.getFullYear() - fechaNac.getFullYear() < 17) {
     showError("fecha", "Debe ser mayor de 18 años");
     return false;
   }
