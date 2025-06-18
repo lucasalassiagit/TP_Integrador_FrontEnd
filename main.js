@@ -1,41 +1,33 @@
 //Index
 async function paisesMasPoblados() {
   try {
-    // 1. Verificar si estamos en la página correcta
     const cuerpoTabla = document.getElementById("cuerpoTabla");
-    if (!cuerpoTabla) return; // Salir si no estamos en la página de países
+    if (!cuerpoTabla) return;
 
-    // 2. Configurar contenedores
     let cardsContainer = document.getElementById("cardsContainer");
     if (!cardsContainer) {
       cardsContainer = document.createElement("div");
       cardsContainer.id = "cardsContainer";
-      cardsContainer.className = "row d-md-none"; // Solo visible en móviles
+      cardsContainer.className = "row d-md-none";
       document.body.appendChild(cardsContainer);
     }
 
-    // Hacemos la solicitud HTTP (GET)
     let contador = 1;
     const response = await fetch(
       "https://restcountries.com/v3.1/all?fields=translations,capital,continents,population"
     );
 
-    // Verificamos si la respuesta fue exitosa
     if (!response.ok) {
       throw new Error("Error al cargar los paises");
     }
 
-    // Convertimos la respuesta en JSON
-    const data = await response.json(); //En JavaScript, los datos JSON se manejan directamente como objetos. Data es el objeto completo.
+    const data = await response.json();
 
-    // Ordenar por población (de mayor a menor)
     const ordenPoblacion = data.sort((a, b) => b.population - a.population);
 
-    // Tomar los 20 primeros
     const ArrayPaises = ordenPoblacion.slice(0, 10);
 
     ArrayPaises.forEach((pais) => {
-      //Tabla solo para desktop
       const fila = document.createElement("tr");
       fila.innerHTML = `
       <th scope="row">${contador}</th>
@@ -47,7 +39,6 @@ async function paisesMasPoblados() {
       contador++;
       cuerpoTabla.appendChild(fila);
 
-      // En moviles desaparece la tabla y se convierte en tablas
       const card = document.createElement("div");
       card.innerHTML = `
     <div class="card text-bg-secondary mb-2">
@@ -65,20 +56,16 @@ async function paisesMasPoblados() {
   }
 }
 
-// Verificar si debemos ejecutar esta función en la página actual
-function initPaisesPage() {
-  // Solo ejecutar si estamos en la página que tiene la tabla
+function paginaPaises() {
   if (document.getElementById("cuerpoTabla")) {
     document.addEventListener("DOMContentLoaded", paisesMasPoblados);
   }
 }
 
-// Llamar a la función de inicialización
-initPaisesPage();
+paginaPaises();
 
 //Registro
 
-// Funciones de validación (helper functions)
 function showError(fieldId, message) {
   const errorElement = document.getElementById(`${fieldId}Error`);
   const inputElement = document.getElementById(fieldId);
@@ -96,23 +83,20 @@ function showError(fieldId, message) {
   }
 }
 
-function clearErrors() {
-  // Limpiar mensajes de error
+function borrarErrores() {
   const errorMessages = document.querySelectorAll(".error-message");
   errorMessages.forEach((error) => {
     error.textContent = "";
     error.style.display = "none";
   });
 
-  // Restaurar estilos de los inputs
   const inputs = document.querySelectorAll("input, select, textarea");
   inputs.forEach((input) => {
     input.style.borderColor = "";
   });
 }
 
-// Funciones de validación de campos
-function validateNombre() {
+function validarNombre() {
   const nombre = document.getElementById("nombre").value.trim();
   const errorElement = document.getElementById("nombreError");
 
@@ -129,7 +113,7 @@ function validateNombre() {
   return true;
 }
 
-function validateEmail() {
+function validarEmail() {
   const email = document.getElementById("email").value.trim();
   const errorElement = document.getElementById("emailError");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -147,7 +131,7 @@ function validateEmail() {
   return true;
 }
 
-function validateTelefono() {
+function validarTelefono() {
   const telefono = document.getElementById("telefono").value.trim();
   const errorElement = document.getElementById("telefonoError");
   const telefonoRegex = /^\d{8,15}$/;
@@ -165,7 +149,7 @@ function validateTelefono() {
   return true;
 }
 
-function validateFecha() {
+function validarFecha() {
   const fechaInput = document.getElementById("fecha");
   const fecha = fechaInput.value;
   const errorElement = document.getElementById("fechaError");
@@ -192,7 +176,7 @@ function validateFecha() {
   return true;
 }
 
-function validateTerminos() {
+function validarTerminos() {
   const terminos = document.getElementById("terminos");
   const errorElement = document.getElementById("terminosError");
 
@@ -204,60 +188,42 @@ function validateTerminos() {
   return true;
 }
 
-// Función principal de registro
-function initRegistro() {
+function formularioRegistro() {
   const form = document.getElementById("contactForm");
-  if (!form) return; // Si no existe el formulario, salir
+  if (!form) return;
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Limpiar errores previos
-    clearErrors();
+    borrarErrores();
 
-    // Validar campos
-    const isNombreValid = validateNombre();
-    const isEmailValid = validateEmail();
-    const isTelefonoValid = validateTelefono();
-    const isFechaValid = validateFecha();
-    const isTerminosValid = validateTerminos();
+    const nombreValido = validarNombre();
+    const emailValido = validarEmail();
+    const telefonoValido = validarTelefono();
+    const fechaValida = validarFecha();
+    const terminosValido = validarTerminos();
 
-    //Creo instancia de toast (notificacion)
     const toastEl = document.getElementById("myToast");
     const toastMessage = document.getElementById("toastMessage");
     const toast = new bootstrap.Toast(toastEl);
 
     // Si todo es válido, enviar formulario
     if (
-      isNombreValid &&
-      isEmailValid &&
-      isTelefonoValid &&
-      isFechaValid &&
-      isTerminosValid
+      nombreValido &&
+      emailValido &&
+      telefonoValido &&
+      fechaValida &&
+      terminosValido
     ) {
       form.reset();
       toastEl.classList.add("bg-success");
       toast.show();
     }
   });
-
-  // Validación en tiempo real (opcional)
-  /*document.getElementById("nombre").addEventListener("blur", validateNombre);
-  document.getElementById("email").addEventListener("blur", validateEmail);
-  document
-    .getElementById("telefono")
-    .addEventListener("blur", validateTelefono);
-  document.getElementById("fecha").addEventListener("change", validateFecha);
-  document.getElementById("terminos").addEventListener("change", function () {
-    if (this.checked) {
-      document.getElementById("terminosError").textContent = "";
-    }
-  });*/
 }
 
-// Inicializar solo si estamos en la página correcta
 document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("contactForm")) {
-    initRegistro();
+    formularioRegistro();
   }
 });
