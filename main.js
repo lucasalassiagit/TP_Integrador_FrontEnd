@@ -223,7 +223,7 @@ function formularioRegistro() {
 
       setTimeout(() => {
         toast.hide();
-      }, 3000);
+      }, 4000);
 
       form.reset();
     }
