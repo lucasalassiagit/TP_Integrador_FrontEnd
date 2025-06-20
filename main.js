@@ -1,15 +1,15 @@
-//Index
+//estadisticas
 async function paisesMasPoblados() {
   try {
     const cuerpoTabla = document.getElementById("cuerpoTabla");
     if (!cuerpoTabla) return;
 
-    let cardsContainer = document.getElementById("cardsContainer");
-    if (!cardsContainer) {
-      cardsContainer = document.createElement("div");
-      cardsContainer.id = "cardsContainer";
-      cardsContainer.className = "row d-md-none";
-      document.body.appendChild(cardsContainer);
+    let contenedorCards = document.getElementById("contenedorCards");
+    if (!contenedorCards) {
+      contenedorCards = document.createElement("div");
+      contenedorCards.id = "contenedorCards";
+      contenedorCards.className = "row d-md-none";
+      document.body.appendChild(contenedorCards);
     }
 
     let contador = 1;
@@ -49,7 +49,7 @@ async function paisesMasPoblados() {
         <p class="card-text"><b>Poblacion:</b> ${pais.population.toLocaleString()}</p>
       </div>
     </div>`;
-      cardsContainer.appendChild(card);
+      contenedorCards.appendChild(card);
     });
   } catch (error) {
     console.error("Error:", error);
@@ -207,7 +207,6 @@ function formularioRegistro() {
     const toastMessage = document.getElementById("toastMessage");
     const toast = new bootstrap.Toast(toastEl);
 
-    // Si todo es válido, enviar formulario
     if (
       nombreValido &&
       emailValido &&
@@ -215,9 +214,18 @@ function formularioRegistro() {
       fechaValida &&
       terminosValido
     ) {
-      form.reset();
+      const toastEl = document.getElementById("Toast");
+      const toast = new bootstrap.Toast(toastEl);
+
       toastEl.classList.add("bg-success");
+
       toast.show();
+
+      setTimeout(() => {
+        toast.hide();
+      }, 3000);
+
+      form.reset();
     }
   });
 }
