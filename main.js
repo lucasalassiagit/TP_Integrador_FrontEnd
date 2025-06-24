@@ -1,9 +1,11 @@
-//estadisticas
+//    PAGINA ESTADISTICAS
 async function paisesMasPoblados() {
   try {
+    // 1. Obtener referencias a los elementos del DOM
     const cuerpoTabla = document.getElementById("cuerpoTabla");
-    if (!cuerpoTabla) return;
+    if (!cuerpoTabla) return; // Si no existe la tabla, salir
 
+    // 2. Crear contenedor para cards si no existe (versión móvil)
     let contenedorCards = document.getElementById("contenedorCards");
     if (!contenedorCards) {
       contenedorCards = document.createElement("div");
@@ -13,6 +15,8 @@ async function paisesMasPoblados() {
     }
 
     let contador = 1;
+
+    // 3. Hacer petición a la API de países
     const response = await fetch(
       "https://restcountries.com/v3.1/all?fields=translations,capital,continents,population"
     );
@@ -21,13 +25,18 @@ async function paisesMasPoblados() {
       throw new Error("Error al cargar los paises");
     }
 
+    // 4. Procesar la respuesta
     const data = await response.json();
 
+    // 5. Ordenar países por población (de mayor a menor)
     const ordenPoblacion = data.sort((a, b) => b.population - a.population);
 
+    // 6. Tomar solo los 10 primeros
     const ArrayPaises = ordenPoblacion.slice(0, 10);
 
+    // 7. Crear filas de tabla y cards para cada país
     ArrayPaises.forEach((pais) => {
+      // Crear fila para la tabla (versión desktop)
       const fila = document.createElement("tr");
       fila.innerHTML = `
       <th scope="row">${contador}</th>
@@ -39,6 +48,7 @@ async function paisesMasPoblados() {
       contador++;
       cuerpoTabla.appendChild(fila);
 
+      // Crear card para versión móvil
       const card = document.createElement("div");
       card.innerHTML = `
     <div class="card text-bg-secondary mb-2">
@@ -57,6 +67,7 @@ async function paisesMasPoblados() {
 }
 
 function paginaPaises() {
+  // Solo ejecutar si estamos en la página de estadísticas
   if (document.getElementById("cuerpoTabla")) {
     document.addEventListener("DOMContentLoaded", paisesMasPoblados);
   }
@@ -64,8 +75,9 @@ function paginaPaises() {
 
 paginaPaises();
 
-//Registro
+//        PAGINA REGISTRO
 
+// Funciones para mostrar/ocultar errores
 function showError(fieldId, message) {
   const errorElement = document.getElementById(`${fieldId}Error`);
   const inputElement = document.getElementById(fieldId);
@@ -90,11 +102,14 @@ function borrarErrores() {
     error.style.display = "none";
   });
 
+  // Restaura bordes de los inputs
   const inputs = document.querySelectorAll("input, select, textarea");
   inputs.forEach((input) => {
     input.style.borderColor = "";
   });
 }
+
+// Funciones de validación para cada campo
 
 function validarNombre() {
   const nombre = document.getElementById("nombre").value.trim();
@@ -117,6 +132,7 @@ function validarEmail() {
   const email = document.getElementById("email").value.trim();
   const errorElement = document.getElementById("emailError");
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // (regex) no lleva paréntesis porque no es una función, sino un literal de expresión regular en JavaScript.
 
   if (email === "") {
     showError("email", "El email es obligatorio");
@@ -207,6 +223,7 @@ function formularioRegistro() {
     const toastMessage = document.getElementById("toastMessage");
     const toast = new bootstrap.Toast(toastEl);
 
+    // Si todo es válido, muestra toast de éxito
     if (
       nombreValido &&
       emailValido &&
@@ -230,6 +247,7 @@ function formularioRegistro() {
   });
 }
 
+// Inicializacion
 document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("contactForm")) {
     formularioRegistro();
